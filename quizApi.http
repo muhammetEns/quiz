@@ -1,0 +1,80 @@
+@quizApi_HostAddress = http://localhost:5003
+
+### Arayüz (statik)
+GET {{quizApi_HostAddress}}/
+
+### Admin arayüzü (tarayıcı)
+GET {{quizApi_HostAddress}}/admin/
+
+### Liderlik — quizId zorunlu (kategori başına ayrı); yoksa boş dizi
+GET {{quizApi_HostAddress}}/api/leaderboard?take=15
+Accept: application/json
+
+### Liderlik — Film & Dizi (id=1)
+GET {{quizApi_HostAddress}}/api/leaderboard?quizId=1&take=15
+Accept: application/json
+
+### Admin — quiz listesi
+GET {{quizApi_HostAddress}}/api/admin/quizzes
+Accept: application/json
+
+### Admin — quiz 1 soruları
+GET {{quizApi_HostAddress}}/api/admin/quizzes/1/questions
+Accept: application/json
+
+### Quiz listesi (oyun)
+GET {{quizApi_HostAddress}}/api/quizzes
+Accept: application/json
+
+### Quiz 1 — oynama (doğru cevap yok)
+GET {{quizApi_HostAddress}}/api/quizzes/1
+Accept: application/json
+
+### Tek soru doğrulama (canlı oyun)
+POST {{quizApi_HostAddress}}/api/quizzes/1/questions/1/check
+Content-Type: application/json
+
+{ "selectedOptionIndex": 0 }
+
+### Quiz 1 (Film & Dizi) — tek soru
+POST {{quizApi_HostAddress}}/api/quizzes/1/submit
+Content-Type: application/json
+
+{
+  "playerName": "Deneme",
+  "sessionQuestionIds": [ 1 ],
+  "answers": [{ "questionId": 1, "selectedOptionIndex": 1 }]
+}
+
+### Quiz 5 (Bilmece) — 20 soru
+POST {{quizApi_HostAddress}}/api/quizzes/5/submit
+Content-Type: application/json
+
+{
+  "playerName": "Deneme",
+  "sessionQuestionIds": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ],
+  "answers": [
+    { "questionId": 1, "selectedOptionIndex": 0 },
+    { "questionId": 2, "selectedOptionIndex": 2 },
+    { "questionId": 3, "selectedOptionIndex": 0 },
+    { "questionId": 4, "selectedOptionIndex": 0 },
+    { "questionId": 5, "selectedOptionIndex": 0 },
+    { "questionId": 6, "selectedOptionIndex": 1 },
+    { "questionId": 7, "selectedOptionIndex": 1 },
+    { "questionId": 8, "selectedOptionIndex": 0 },
+    { "questionId": 9, "selectedOptionIndex": 0 },
+    { "questionId": 10, "selectedOptionIndex": 1 },
+    { "questionId": 11, "selectedOptionIndex": 0 },
+    { "questionId": 12, "selectedOptionIndex": 0 },
+    { "questionId": 13, "selectedOptionIndex": 3 },
+    { "questionId": 14, "selectedOptionIndex": 0 },
+    { "questionId": 15, "selectedOptionIndex": 0 },
+    { "questionId": 16, "selectedOptionIndex": 1 },
+    { "questionId": 17, "selectedOptionIndex": 1 },
+    { "questionId": 18, "selectedOptionIndex": 0 },
+    { "questionId": 19, "selectedOptionIndex": 0 },
+    { "questionId": 20, "selectedOptionIndex": 0 }
+  ]
+}
+
+###

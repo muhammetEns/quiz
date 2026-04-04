@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bulmaca Quiz</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Skor tablosu">
+      <h2 class="sidebar-title">En iyi skorlar <span id="sidebar-category" class="sidebar-cat"></span></h2>
+      <p class="sidebar-hint">Seçtiğin kategoride, kaybetmeden bitirenler.</p>
+      <ol id="leaderboard-list" class="leaderboard"></ol>
+      <p id="leaderboard-empty" class="sidebar-empty hidden">Henüz kayıt yok.</p>
+    </aside>
+
+    <div class="main">
+      <div class="app">
+        <header class="header">
+          <h1>Bulmaca Quiz</h1>
+          <p class="tagline">Doğru +2 · Yanlış −1 · Tüm tur için 60 sn · Puan −10 olunca elenirsin</p>
+        </header>
+
+        <section id="screen-start" class="panel">
+          <p class="lead">Adını yaz, kategori seç, soruları sırayla cevapla.</p>
+          <label class="field-label" for="player-name">Adın</label>
+          <input type="text" id="player-name" class="text-input" maxlength="80" placeholder="ör. Ayşe" autocomplete="nickname" />
+          <button type="button" id="btn-start" class="btn primary">Devam</button>
+        </section>
+
+        <section id="screen-categories" class="panel hidden">
+          <p class="lead">Merhaba <strong id="greet-name"></strong>, bir kategori seç.</p>
+          <div id="category-grid" class="category-grid"></div>
+          <button type="button" id="btn-back-to-name" class="btn secondary btn-back">İsme dön</button>
+        </section>
+
+        <section id="screen-play" class="panel hidden" aria-live="polite">
+          <p class="playing-as">Oyuncu: <strong id="playing-name"></strong> · <span id="playing-category" class="playing-cat"></span></p>
+          <div class="hud">
+            <div class="hud-score">
+              <span class="label">Puan</span>
+              <strong id="score-value">0</strong>
+            </div>
+            <div class="hud-progress">
+              <span class="label">Soru</span>
+              <strong><span id="q-current">1</span> / <span id="q-total">20</span></strong>
+            </div>
+            <div class="hud-timer">
+              <span class="label">Tur süresi</span>
+              <strong id="question-timer" class="timer-value">60</strong><span class="timer-unit"> sn</span>
+            </div>
+          </div>
+          <div class="meter-wrap" aria-hidden="true">
+            <div id="score-meter" class="meter"></div>
+          </div>
+          <p id="question-text" class="question"></p>
+          <div id="options" class="options"></div>
+          <p id="feedback" class="feedback" role="status"></p>
+        </section>
+
+        <section id="screen-lost" class="panel hidden">
+          <h2>Elenildin</h2>
+          <p>Puanın <strong id="lost-score"></strong> oldu ve −10 eşiğine ulaşıldı.</p>
+          <div class="btn-row">
+            <button type="button" id="btn-retry" class="btn primary">Yeniden dene</button>
+            <button type="button" id="btn-change-name-lost" class="btn secondary">İsim değiştir</button>
+          </div>
+        </section>
+
+        <section id="screen-done" class="panel hidden">
+          <h2>Tebrikler</h2>
+          <p>Tüm soruları tamamladın. Bitiş puanın: <strong id="done-score"></strong></p>
+          <p class="muted">Doğru sayısı: <span id="done-correct"></span></p>
+          <div class="btn-row">
+            <button type="button" id="btn-again" class="btn primary">Baştan oyna</button>
+            <button type="button" id="btn-change-name-done" class="btn secondary">İsim değiştir</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="app.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz Admin</title>
+  <link rel="stylesheet" href="/admin/admin.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <h1>Quiz yönetimi</h1>
+      <p class="warn">Şifre koruması yok — yalnızca güvenilir ortamda kullanın.</p>
+      <a href="/" class="link-home">← Oyuna dön</a>
+    </header>
+
+    <section class="panel">
+      <label class="lbl" for="quiz-select">Kategori (quiz)</label>
+      <select id="quiz-select"></select>
+      <button type="button" id="btn-refresh" class="btn secondary">Listeyi yenile</button>
+    </section>
+
+    <section class="panel">
+      <h2>Sorular</h2>
+      <div id="questions-wrap"></div>
+    </section>
+
+    <section class="panel form-panel">
+      <h2 id="form-title">Yeni soru</h2>
+      <label class="lbl" for="q-text">Soru metni</label>
+      <textarea id="q-text" rows="3" maxlength="2000"></textarea>
+      <div class="opts">
+        <label>Şık A (0)<input type="text" id="opt0" maxlength="500" /></label>
+        <label>Şık B (1)<input type="text" id="opt1" maxlength="500" /></label>
+        <label>Şık C (2)<input type="text" id="opt2" maxlength="500" /></label>
+        <label>Şık D (3)<input type="text" id="opt3" maxlength="500" /></label>
+      </div>
+      <label class="lbl" for="correct">Doğru şık (indeks)</label>
+      <select id="correct">
+        <option value="0">0 — A</option>
+        <option value="1">1 — B</option>
+        <option value="2">2 — C</option>
+        <option value="3">3 — D</option>
+      </select>
+      <label class="lbl" for="sort">Sıra (SortOrder, isteğe bağlı)</label>
+      <input type="number" id="sort" placeholder="Boş bırakırsan sona eklenir" />
+      <div class="form-actions">
+        <button type="button" id="btn-save" class="btn primary">Kaydet</button>
+        <button type="button" id="btn-new" class="btn secondary">Formu temizle (yeni)</button>
+      </div>
+      <p id="form-msg" class="msg" role="status"></p>
+    </section>
+  </div>
+  <script src="/admin/admin.js" type="module"></script>
+</body>
+</html>

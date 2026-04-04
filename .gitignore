@@ -1,0 +1,44 @@
+## Build
+bin/
+obj/
+publish/
+out/
+
+## SQLite (yerel veritabanı — repoda tutulmaz)
+Data/*.db
+Data/*.db-shm
+Data/*.db-wal
+
+## IDE / editor
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## OS
+.DS_Store
+Thumbs.db
+
+## Logs / geçici
+*.log
+logs/
+tmp/
+temp/
+
+## Test / coverage
+TestResults/
+coverage/
+*.trx
+
+## NuGet (yerel paket önbelleği proje içindeyse)
+packages/
+
+## Ortam sırları (asla commit etme)
+appsettings.*.local.json
+secrets.json
+
+## Rider
+*.sln.iml
