@@ -54,8 +54,10 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-// Yerel ağda http://IP:5003 ile erişimde tarayıcıyı HTTPS’e zorlamaz (telefon/tablet için).
-if (!app.Environment.IsDevelopment())
+// Render: TLS kenarda sonlanır, konteyner yalnızca HTTP dinler. Bu durumda UseHttpsRedirection
+// HTTPS portunu bulamaz (HttpsRedirectionMiddleware event 3) ve gereksiz uyarı üretir.
+var behindTlsProxy = string.Equals(Environment.GetEnvironmentVariable("RENDER"), "true", StringComparison.OrdinalIgnoreCase);
+if (!app.Environment.IsDevelopment() && !behindTlsProxy)
 {
     app.UseHttpsRedirection();
 }
