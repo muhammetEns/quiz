@@ -1,0 +1,14 @@
+**/bin/
+**/obj/
+**/publish/
+**/.git/
+**/.vs/
+**/.vscode/
+**/.idea/
+.gitignore
+.dockerignore
+Dockerfile
+*.user
+**/*.db
+**/*.db-shm
+**/*.db-wal

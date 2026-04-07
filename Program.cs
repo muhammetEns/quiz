@@ -1,8 +1,21 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using quizApi.Data;
 using quizApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Render (ve benzeri PaaS) gelen istek için PORT ortam değişkenini kullanır.
+var renderPort = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrEmpty(renderPort))
+    builder.WebHost.UseUrls($"http://0.0.0.0:{renderPort}");
+
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    options.KnownIPNetworks.Clear();
+    options.KnownProxies.Clear();
+});
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IQuizStore, DatabaseQuizStore>();
@@ -26,6 +39,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+app.UseForwardedHeaders();
 
 using (var scope = app.Services.CreateScope())
 {
